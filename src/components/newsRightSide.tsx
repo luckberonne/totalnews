@@ -25,7 +25,7 @@ export default function NewsRightSide() {
   return (
     <div className="mt-4">
       {list.map((item, index) => (
-        <FastNew/>
+        <FastNew key={index}/>
       ))}
     </div>
   );

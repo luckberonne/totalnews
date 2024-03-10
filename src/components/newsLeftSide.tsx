@@ -1,48 +1,28 @@
 import React from "react";
-import { Card, CardBody, Image, ScrollShadow } from "@nextui-org/react";
-import { list } from "postcss";
+import { ScrollShadow } from "@nextui-org/react";
 import New from "./new";
 
 export default function NewsLeftSide() {
-    const list = [
-        {
-          title: "Orange",
-          img: "/images/fruit-1.jpeg",
-          price: "$5.50",
-        },
-        {
-          title: "Tangerine",
-          img: "/images/fruit-2.jpeg",
-          price: "$3.00",
-        },
-        {
-            title: "Tangerine",
-            img: "/images/fruit-2.jpeg",
-            price: "$3.00",
-          },
-          {
-            title: "Tangerine",
-            img: "/images/fruit-2.jpeg",
-            price: "$3.00",
-          },
-          {
-            title: "Tangerine",
-            img: "/images/fruit-2.jpeg",
-            price: "$3.00",
-          },
-          {
-            title: "Tangerine",
-            img: "/images/fruit-2.jpeg",
-            price: "$3.00",
-          },
-    ];
+  const list: NewModel[] = [
+    {
+      id: 1,
+      titulo: "Sample Title",
+      subtitulo: "Sample Subtitle",
+      lead: "Sample Lead",
+      cuerpo: "Sample Body",
+      extra: "Sample Extra",
+      autor: "Sample Author",
+      fecha_hora: new Date()
+    }
+  ];
+
   return (
     <ScrollShadow hideScrollBar className=" h-[700px]">
-        <div className="mt-4 gap-2 grid grid-cols-1">
+      <div className="mt-4 gap-2 grid grid-cols-1">
         {list.map((item, index) => (
-            <New/>
-            ))}
-        </div>
+          <New key={index} item={item} />
+        ))}
+      </div>
 
     </ScrollShadow>
 
