@@ -1,4 +1,4 @@
-interface NewModel {
+interface Noticias {
     id: number;
     titulo: string;
     subtitulo: string;

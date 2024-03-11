@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardBody, Image } from "@nextui-org/react";
 
 interface Props {
-  item: NewModel;
+  item: Noticias;
 }
 
 const New: React.FC<Props> = ({ item }) => {

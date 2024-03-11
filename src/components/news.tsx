@@ -1,5 +1,4 @@
 import React from "react";
-import { Card, CardBody, Divider, Image } from "@nextui-org/react";
 import NewsLeftSide from "./newsLeftSide";
 import NewsRightSide from "./newsRightSide";
 
