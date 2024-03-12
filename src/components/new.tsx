@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardBody, Image } from "@nextui-org/react";
+import { Noticias } from "@prisma/client";
 
 interface Props {
   item: Noticias;
