@@ -22,7 +22,7 @@ export default function FastNew() {
           </div>
 
           <div className="flex flex-col col-span-6 md:col-span-8">
-            <h1 className="text-2xl font-bold mb-4">My Awesome Album</h1>
+            <h1 className="text-2xl font-bold mb-4">Mini Noticia</h1>
           </div>
         </div>
       </CardBody>

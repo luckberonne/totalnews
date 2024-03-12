@@ -6,9 +6,9 @@ export default function ExpressNews() {
         <Card>
             <CardBody>
                 <div className="flex h-5 items-center space-x-4 text-small">
-                    <div>egardless of your design experience.</div>
+                    <div>Dolar Hoy: $400.</div>
                     <Divider orientation="vertical" />
-                    <div>egardless of your design experience.</div>
+                    <div>Alberto Fernandez quiere volver al poder con un ejercito de monos entrenados.</div>
                 </div>
             </CardBody>
         </Card>

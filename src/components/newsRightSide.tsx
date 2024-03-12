@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { list } from "postcss";
-import New from "./new";
+import New from "../app/components/new";
 import FastNew from "./fastNews";
 
 export default function NewsRightSide() {

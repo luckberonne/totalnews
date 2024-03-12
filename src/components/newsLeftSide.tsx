@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
-import New from "./new";
+import New from "../app/components/new";
 import { GetNoticias } from "@/actions/getActions";
-import PaginationSide from "./paginationSide";
+import PaginationSide from "../app/components/paginationSide";
 
 export default async function NewsLeftSide({
   searchParams,
