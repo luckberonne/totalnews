@@ -17,7 +17,7 @@ export default async function NewsLeftSide({
   const limit = Number(searchParams?.limit) || 3
   const offset = (currentPage - 1) * limit
 
-  const { data, totalPages } = await GetNoticias({offset, limit, search})
+  const { data, totalCount, totalPages } = await GetNoticias({offset, limit, search})
 
   return (
     <div className="mt-4 gap-2 grid grid-cols-1">
@@ -27,7 +27,7 @@ export default async function NewsLeftSide({
         ))}
       </Suspense>
 
-      <PaginationSide totalPages={totalPages} currentPage={currentPage}/>
+      <PaginationSide totalPages={totalPages}/>
 
     </div>
 
