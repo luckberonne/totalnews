@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,13 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Noticias{
-  id         Int      @id @default(autoincrement())
-  titulo     String
-  subtitulo  String
-  lead       String
-  cuerpo     String
-  extra      String
-  autor      String
-  fecha_hora DateTime @default(now())
+model Noticias {
+  id         Int       @id @default(autoincrement())
+  titulo     String?   @db.VarChar(255)
+  subtitulo  String?   @db.VarChar(255)
+  lead       String?
+  cuerpo     String?
+  extra      String?
+  autor      String?   @db.VarChar(100) @default("Anónimo")
+  fecha_hora DateTime? @db.Timestamp(6) @default(now())
 }

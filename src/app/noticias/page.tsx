@@ -2,8 +2,6 @@ import React, { Suspense } from "react";
 import { GetNoticias } from "@/actions/getActions";
 import New from "../components/new";
 import PaginationSide from "../components/paginationSide";
-import FastNew from "@/components/fastNews";
-import FastNews from "@/components/fastNews";
 import NewsRightSide from "@/components/newsRightSide";
 
 export default async function NewsLeftSide({
