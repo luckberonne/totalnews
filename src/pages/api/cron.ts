@@ -2,7 +2,7 @@
 import { PostNoticias } from "@/actions/postActions";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Noticias } from "@prisma/client";
-import { NextResponse } from 'next/server';
+import { NextApiRequest, NextApiResponse } from "next";
 
 export const config = {
   runtime: 'edge',
@@ -28,7 +28,7 @@ function parsearTexto(texto: string) {
   };
 }
 
-export default async function handler() {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     // For text-only input, use the gemini-pro model
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -71,12 +71,12 @@ export default async function handler() {
     console.log({
       data: `Updated news at ${new Date().toISOString()}. Noticia: ${noticia.titulo} `,
     });
-    return NextResponse.json({
+    return res.json({
       data: `Updated news at ${new Date().toISOString()}. Noticia: ${noticia.titulo} `,
     });
   } catch (error: any) {
     console.log({ error });
-    return NextResponse.json({
+    return res.json({
       error: error.message,
     });
   }
