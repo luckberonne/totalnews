@@ -3,11 +3,6 @@ import { PostNoticias } from "@/actions/postActions";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from 'next/server';
 
-export const config = {
-	runtime: 'edge',
-};
-
-
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI("AIzaSyDxUtirxFw02eGbtD6I1gd_lGnp98d_7pI");
 
