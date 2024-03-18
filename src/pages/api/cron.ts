@@ -41,7 +41,7 @@ function separarTexto(texto: string): Noticia {
 }
 
 
-export default async function run(res: NextApiResponse) {
+export default async function run(res: NextApiResponse, req: NextApiRequest) {
   try {
     // For text-only input, use the gemini-pro model
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
