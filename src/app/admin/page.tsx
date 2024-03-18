@@ -11,7 +11,7 @@ export default function Admin() {
             console.error("Error executing function run():", error);
         }
     };
-
+ 
     return (
         <div>
             <Button onClick={handleRun}>Run Function</Button>
