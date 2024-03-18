@@ -13,12 +13,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const prompt = `
-    (in spanish) As an imaginative journalist for a quirky and fictional newspaper, your forte lies in creating hilarious and entertaining fake news stories that captivate readers with their creativity and humor. Your task is to craft a funny and absurd news piece for our newspaper. Here are the details you need to include:
-    - *Headline*: [Blank]
-    - *Subtitle*: [Blank]
-    - *Lead*: [Blank]
-    - *Body*: [Blank]
-    - *Extra*: [Blank]
+    As an imaginative journalist for a quirky and fictional newspaper, your forte lies in creating hilarious and entertaining fake news stories that captivate readers with their creativity and humor. Your task is to craft a funny and absurd news piece for our newspaper. Here are the details you need to include:
+    - *Headline*: [Blank](this in spanish)
+    - *Subtitle*: [Blank](this in spanish)
+    - *Lead*: [Blank](this in spanish)
+    - *Body*: [Blank](this in spanish)
+    - *Extra*: [Blank](this in spanish)
     - *Image Prompt*: [Blank](this in english)
     Your goal is to maintain a consistent structure for the news article with a touch of humor in every section. Ensure the headline is attention-grabbing, the lead captures the essence of the story, and the body elaborates on the details in a comical and engaging manner. Add a quirky twist at the end to leave the readers amused. Remember to keep the tone light-hearted and the content witty throughout the article.`;
 
