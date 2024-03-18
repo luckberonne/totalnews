@@ -2,6 +2,7 @@
 import { PostNoticias } from "@/actions/postActions";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from 'next/server';
+import { text } from "stream/consumers";
 
 
 // Access your API key as an environment variable (see "Set up your API key" above)
@@ -38,6 +39,7 @@ function separarTexto(texto: string): Noticia {
           noticia.extra = parte.substring(parte.indexOf(':') + 4).trim();
       }
   });
+  console.log(texto);
   return noticia;
 }
 
