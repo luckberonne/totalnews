@@ -62,11 +62,17 @@ export default async function run(){
     const text = response.text();
     const noticia = separarTexto(text);
     await PostNoticias(noticia)
+    console.log({
+			data: `Updated new: ${noticia.titulo}`
+		});
     return NextResponse.json({
-			data: `Updated news: ${noticia.titulo}`
+			data: `Updated new: ${noticia.titulo}`
 		});
   }
-  catch (error) {
-    console.error("Error executing function run():", error);
+  catch (error: any) {
+		console.log({ error });
+		return NextResponse.json({
+			error: error.message,
+		});
   }
 }
