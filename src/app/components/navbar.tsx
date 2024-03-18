@@ -1,15 +1,20 @@
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
-import {AcmeLogo} from "./AcmeLogo.jsx";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
+import { AcmeLogo } from "./AcmeLogo.jsx";
 
 export default function App() {
   return (
     <Navbar shouldHideOnScroll>
-      <NavbarBrand>
+      {/* <NavbarBrand>
         <AcmeLogo />
         <p className="font-bold text-inherit">ACME</p>
-      </NavbarBrand>
-      {/* <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      </NavbarBrand> */}
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <NavbarBrand>
+          <AcmeLogo />
+          <p className="font-bold text-inherit">TotalNews</p>
+        </NavbarBrand>
+        {/*
         <NavbarItem>
           <Link color="foreground" href="#">
             Features
@@ -24,8 +29,9 @@ export default function App() {
           <Link color="foreground" href="#">
             Integrations
           </Link>
-        </NavbarItem>
+        </NavbarItem>*/}
       </NavbarContent>
+      {/*
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
           <Link href="#">Login</Link>
