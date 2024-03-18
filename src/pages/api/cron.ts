@@ -8,11 +8,11 @@ const genAI = new GoogleGenerativeAI("AIzaSyDxUtirxFw02eGbtD6I1gd_lGnp98d_7pI");
 
 
 function parsearTexto(texto: string) {
-  const secciones = texto.split("**Título:**");
-  const titulo = secciones[1].split("**Subtítulo:**")[0].trim();
-  const subtitulo = secciones[1].split("**Subtítulo:**")[1].split("**Lead:**")[0].trim();
-  const lead = secciones[1].split("**Lead:**")[1].split("**Cuerpo:**")[0].trim();
-  const cuerpo = secciones[1].split("**Cuerpo:**")[1].split("**Extra:**")[0].trim();
+  const secciones = texto.split("**Headline:**");
+  const titulo = secciones[1].split("**Subtitle:**")[0].trim();
+  const subtitulo = secciones[1].split("**Subtitle:**")[1].split("**Lead:**")[0].trim();
+  const lead = secciones[1].split("**Lead:**")[1].split("**Body:**")[0].trim();
+  const cuerpo = secciones[1].split("**Body:**")[1].split("**Extra:**")[0].trim();
   const extra = secciones[1].split("**Extra:**")[1].trim();
 
   return {
