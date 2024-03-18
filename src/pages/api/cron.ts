@@ -6,22 +6,22 @@ import { NextApiRequest, NextApiResponse } from "next";
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI("AIzaSyDxUtirxFw02eGbtD6I1gd_lGnp98d_7pI");
 
-function parsearTexto(texto: string) {
-  const secciones = texto.split("**Título:**");
-  const titulo = secciones[1].split("**Subtítulo:**")[0].trim();
-  const subtitulo = secciones[1].split("**Subtítulo:**")[1].split("**Lead:**")[0].trim();
-  const lead = secciones[1].split("**Lead:**")[1].split("**Cuerpo:**")[0].trim();
-  const cuerpo = secciones[1].split("**Cuerpo:**")[1].split("**Extra:**")[0].trim();
-  const extra = secciones[1].split("**Extra:**")[1].trim();
+// function parsearTexto(texto: string) {
+//   const secciones = texto.split("**Título:**");
+//   const titulo = secciones[1].split("**Subtítulo:**")[0].trim();
+//   const subtitulo = secciones[1].split("**Subtítulo:**")[1].split("**Lead:**")[0].trim();
+//   const lead = secciones[1].split("**Lead:**")[1].split("**Cuerpo:**")[0].trim();
+//   const cuerpo = secciones[1].split("**Cuerpo:**")[1].split("**Extra:**")[0].trim();
+//   const extra = secciones[1].split("**Extra:**")[1].trim();
 
-  return {
-    titulo,
-    subtitulo,
-    lead,
-    cuerpo,
-    extra
-  };
-}
+//   return {
+//     titulo,
+//     subtitulo,
+//     lead,
+//     cuerpo,
+//     extra
+//   };
+// }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -29,40 +29,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const prompt = `
-        Generar una noticia graciosa, creativa, original, humorística y falsa, con total libertad.
-        ¡Bienvenido a la sección de noticias más divertida del día! Como experto en generar noticias humorísticas, mi objetivo es crear una historia ingeniosa y original que te haga reír.
-
-        Instrucciones:
-        La noticia debe tener la siguiente estructura: Título, Subtítulo, Lead, Cuerpo y Extra.
-
-        Eres libre de elegir cualquier clase de noticia, ya sea farándula, ciencia, eventos famosos o curiosidades.
-
-        Sé creativo y original en tu enfoque, pero recuerda que la noticia debe ser falsa y humorística.
-
-        Contexto:
-        Imagina que eres el redactor principal de un periódico ficticio llamado "El Juego de Palabras". Tu misión es entretener a los lectores con noticias inusuales y graciosas que los hagan sonreír.
-
-        Detalles específicos:
-        El título debe captar la atención del lector de inmediato y generar expectativa sobre el contenido humorístico.
-
-        El subtítulo puede añadir un toque adicional de humor o preparar al lector para la historia que está por venir.
-
-        El lead debe ser breve pero intrigante, atrayendo aún más a los lectores y animándolos a seguir leyendo.
-
-        El cuerpo de la noticia debe desarrollar la historia, ofreciendo detalles humorísticos y situaciones extravagantes (debe largo).
-
-        El extra puede ser una frase adicional al final de la noticia que añada un remate gracioso o una conclusión sorprendente.
-
-        Resultado deseado:
-        Esperamos que la noticia que generes sea una historia humorística, ingeniosa y completamente ficticia que haga reír a los lectores y les brinde un momento de diversión en medio de su día.
-
-        Recuerda, ¡la creatividad y el humor son clave!`;
+    (in spanish,but the imagen prompt in English) You're an experienced news editor responsible for creating engaging and humorous fake news stories for a fictional newspaper. Your specialty lies in crafting attention-grabbing headlines, intriguing leads, and entertaining content that keeps readers entertained. Your task is to develop a fake and humorous news article for our fictional newspaper. Here are the details you need to include:
+    - Headline: ________
+    - Subheadline: ________
+    - Lead: ________
+    - Body: ________
+    - Humorous Touch: ________
+    Ensure that the article is lighthearted, funny, and creatively written to spark joy in the readers. Once you've generated the news article, also provide a prompt for generating an image related to the main theme of the story. Make sure to follow the same structure for both the news article and the image prompt to maintain consistency and ensure a high level of creativity and humor in both outputs.`;
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
-    const noticia = parsearTexto(text);
-    await PostNoticias(noticia)
+    console.log(text);
+    // const noticia = parsearTexto(text);
+    // await PostNoticias(noticia)
     res.send({message: "All message sent successfully."})
   }
   catch (error) {
