@@ -6,22 +6,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI("AIzaSyDxUtirxFw02eGbtD6I1gd_lGnp98d_7pI");
 
-// function parsearTexto(texto: string) {
-//   const secciones = texto.split("**Título:**");
-//   const titulo = secciones[1].split("**Subtítulo:**")[0].trim();
-//   const subtitulo = secciones[1].split("**Subtítulo:**")[1].split("**Lead:**")[0].trim();
-//   const lead = secciones[1].split("**Lead:**")[1].split("**Cuerpo:**")[0].trim();
-//   const cuerpo = secciones[1].split("**Cuerpo:**")[1].split("**Extra:**")[0].trim();
-//   const extra = secciones[1].split("**Extra:**")[1].trim();
-
-//   return {
-//     titulo,
-//     subtitulo,
-//     lead,
-//     cuerpo,
-//     extra
-//   };
-// }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -29,13 +13,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const prompt = `
-    (in spanish,but the imagen prompt in English) You're an experienced news editor responsible for creating engaging and humorous fake news stories for a fictional newspaper. Your specialty lies in crafting attention-grabbing headlines, intriguing leads, and entertaining content that keeps readers entertained. Your task is to develop a fake and humorous news article for our fictional newspaper. Here are the details you need to include:
-    - Headline: ________
-    - Subheadline: ________
-    - Lead: ________
-    - Body: ________
-    - Humorous Touch: ________
-    Ensure that the article is lighthearted, funny, and creatively written to spark joy in the readers. Once you've generated the news article, also provide a prompt for generating an image related to the main theme of the story. Make sure to follow the same structure for both the news article and the image prompt to maintain consistency and ensure a high level of creativity and humor in both outputs.`;
+    (in spanish) As an imaginative journalist for a quirky and fictional newspaper, your forte lies in creating hilarious and entertaining fake news stories that captivate readers with their creativity and humor. Your task is to craft a funny and absurd news piece for our newspaper. Here are the details you need to include:
+    - *Headline*: [Blank]
+    - *Subtitle*: [Blank]
+    - *Lead*: [Blank]
+    - *Body*: [Blank]
+    - *Extra*: [Blank]
+    - *Image Prompt*: [Blank](this in english)
+    Your goal is to maintain a consistent structure for the news article with a touch of humor in every section. Ensure the headline is attention-grabbing, the lead captures the essence of the story, and the body elaborates on the details in a comical and engaging manner. Add a quirky twist at the end to leave the readers amused. Remember to keep the tone light-hearted and the content witty throughout the article.`;
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
