@@ -19,3 +19,19 @@ model Noticias {
   autor      String?   @db.VarChar(100) @default("Anónimo")
   fecha_hora DateTime? @db.Timestamp(6) @default(now())
 }
+
+model Prompts {
+  id         Int       @id @default(autoincrement())
+  prompt     String?   
+  tipo       TipoPrompt
+  idNoticia  Int?      
+  fecha_hora DateTime? @db.Timestamp(6) @default(now())
+
+  @@index([idNoticia], name: "idNoticiaIndex")
+}
+
+enum TipoPrompt {
+  Imagen
+  Noticia
+  Otro
+}
