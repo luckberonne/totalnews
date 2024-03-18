@@ -1,7 +1,8 @@
 //app/api/cronNew.ts
 import { PostNoticias } from "@/actions/postActions";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from 'next/server';
+
 
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI("AIzaSyDxUtirxFw02eGbtD6I1gd_lGnp98d_7pI");
@@ -41,7 +42,7 @@ function separarTexto(texto: string): Noticia {
 }
 
 
-export default async function run(res: NextApiResponse, req: NextApiRequest) {
+export default async function run(){
   try {
     // For text-only input, use the gemini-pro model
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -59,10 +60,11 @@ export default async function run(res: NextApiResponse, req: NextApiRequest) {
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
-    console.log(text);
     const noticia = separarTexto(text);
     await PostNoticias(noticia)
-    res.send({message: "All message sent successfully."})
+    return NextResponse.json({
+			data: `Updated news: ${noticia.titulo}`
+		});
   }
   catch (error) {
     console.error("Error executing function run():", error);

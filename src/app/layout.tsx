@@ -5,6 +5,7 @@ import { Providers } from "./provider";
 import Footer from "@/app/components/footer";
 import NavbarTop from "@/app/components/navbar";
 import ExpressNews from "./components/expressNews";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ["latin"] });
 
