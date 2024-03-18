@@ -6,31 +6,48 @@ import { NextApiRequest, NextApiResponse } from "next";
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI("AIzaSyDxUtirxFw02eGbtD6I1gd_lGnp98d_7pI");
 
-
-function parsearTexto(texto: string) {
-  const secciones = texto.split("**Headline:**");
-  const titulo = secciones[1].split("**Subtitle:**")[0].trim();
-  const subtitulo = secciones[1].split("**Subtitle:**")[1].split("**Lead:**")[0].trim();
-  const lead = secciones[1].split("**Lead:**")[1].split("**Body:**")[0].trim();
-  const cuerpo = secciones[1].split("**Body:**")[1].split("**Extra:**")[0].trim();
-  const extra = secciones[1].split("**Extra:**")[1].trim();
-
-  return {
-    titulo,
-    subtitulo,
-    lead,
-    cuerpo,
-    extra
-  };
+interface Noticia {
+  titulo: string
+  subtitulo: string
+  lead: string
+  cuerpo: string
+  extra: string
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+function separarTexto(texto: string): Noticia {
+  const partes = texto.split('\n\n'); // Separar por párrafos
+  const noticia: Noticia = {
+      titulo: '',
+      subtitulo: '',
+      lead: '',
+      cuerpo: '',
+      extra: ''
+  };
+
+  partes.forEach((parte) => {
+      if (parte.startsWith('**Titular:**') || parte.startsWith('**Headline:**') || parte.startsWith('**Title:**') || parte.startsWith('**Título:**')) {
+          noticia.titulo = parte.substring(parte.indexOf(':') + 4).trim();
+      } else if (parte.startsWith('**Subtítulo:**') || parte.startsWith('**Subtitle:**')) {
+          noticia.subtitulo = parte.substring(parte.indexOf(':') + 4).trim();
+      } else if (parte.startsWith('**Entrada:**') || parte.startsWith('**Lead:**')) {
+          noticia.lead = parte.substring(parte.indexOf(':') + 4).trim();
+      } else if (parte.startsWith('**Cuerpo:**') || parte.startsWith('**Body:**')) {
+          noticia.cuerpo = parte.substring(parte.indexOf(':') + 4).trim();
+      } else if (parte.startsWith('**Extra:**') || parte.startsWith('**Adicional:**')) {
+          noticia.extra = parte.substring(parte.indexOf(':') + 4).trim();
+      }
+  });
+  return noticia;
+}
+
+
+export default async function run(res: NextApiResponse) {
   try {
     // For text-only input, use the gemini-pro model
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const prompt = `
-    (todo en espanol) As an imaginative journalist for a quirky and fictional newspaper, your forte lies in creating hilarious and entertaining fake news stories that captivate readers with their creativity and humor. Your task is to craft a funny and absurd news piece for our newspaper. Here are the details you need to include:
+    (todo en espanol menos los tags) As an imaginative journalist for a quirky and fictional newspaper, your forte lies in creating hilarious and entertaining fake news stories that captivate readers with their creativity and humor. Your task is to craft a funny and absurd news piece for our newspaper. Here are the details you need to include:
     - *Headline*: [Blank]
     - *Subtitle*: [Blank]
     - *Lead*: [Blank]
@@ -43,7 +60,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const response = await result.response;
     const text = response.text();
     console.log(text);
-    const noticia = parsearTexto(text);
+    const noticia = separarTexto(text);
     await PostNoticias(noticia)
     res.send({message: "All message sent successfully."})
   }
