@@ -1,8 +1,6 @@
-//app/api/cron.ts
+//app/api/cronNew.ts
 import { PostNoticias } from "@/actions/postActions";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Noticias } from "@prisma/client";
-import { NextApiRequest, NextApiResponse } from "next";
 
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI("AIzaSyDxUtirxFw02eGbtD6I1gd_lGnp98d_7pI");
@@ -24,12 +22,11 @@ function parsearTexto(texto: string) {
   };
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  try {
-    // For text-only input, use the gemini-pro model
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+export default async function run() {
+  // For text-only input, use the gemini-pro model
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-    const prompt = `
+  const prompt = `
         Generar una noticia graciosa, creativa, original, humorística y falsa, con total libertad.
         ¡Bienvenido a la sección de noticias más divertida del día! Como experto en generar noticias humorísticas, mi objetivo es crear una historia ingeniosa y original que te haga reír.
 
@@ -58,23 +55,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         Esperamos que la noticia que generes sea una historia humorística, ingeniosa y completamente ficticia que haga reír a los lectores y les brinde un momento de diversión en medio de su día.
 
         Recuerda, ¡la creatividad y el humor son clave!`;
-
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-    const noticia = parsearTexto(text);
-    await PostNoticias(noticia)
-    console.log({
-      data: `Updated news at ${new Date().toISOString()}. Noticia: ${noticia.titulo} `,
-    });
-    return res.json({
-      data: `Updated news at ${new Date().toISOString()}. Noticia: ${noticia.titulo} `,
-    });
-  } catch (error: any) {
-    console.log({ error });
-    return res.json({
-      error: error.message,
-    });
-  }
+        
+  const result = await model.generateContent(prompt);
+  const response = await result.response;
+  const text = response.text();
+  const noticia = parsearTexto(text);
+  await PostNoticias(noticia)
+  console.log(noticia);
 }
-

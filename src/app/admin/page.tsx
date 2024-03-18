@@ -1,20 +1,20 @@
 'use client'
+import run from "@/pages/api/cron";
 import { Button } from "@nextui-org/react";
-// import { handler } from "../../pages/api/cron"; // Asegúrate de que esta ruta sea la correcta
 
 export default function Admin() {
-    // const handleRun = async () => {
-    //     try {
-    //         await run();
-    //         console.log("Function run() executed successfully.");
-    //     } catch (error) {
-    //         console.error("Error executing function run():", error);
-    //     }
-    // };
+    const handleRun = async () => {
+        try {
+            await run();
+            console.log("Function run() executed successfully.");
+        } catch (error) {
+            console.error("Error executing function run():", error);
+        }
+    };
 
     return (
         <div>
-            {/* <Button onClick={handleRun}>Run Function</Button> */}
+            <Button onClick={handleRun}>Run Function</Button>
         </div>
     );
 }
