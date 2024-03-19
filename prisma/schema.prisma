@@ -20,6 +20,14 @@ model Noticias {
   fecha_hora DateTime? @db.Timestamp(6) @default(now())
 }
 
+model MiniNoticias {
+  id         Int       @id @default(autoincrement())
+  titulo     String?   @db.VarChar(255)
+  cuerpo     String?
+  autor      String?   @db.VarChar(100) @default("Anónimo")
+  fecha_hora DateTime? @db.Timestamp(6) @default(now())
+}
+
 model Prompts {
   id         Int       @id @default(autoincrement())
   prompt     String?   

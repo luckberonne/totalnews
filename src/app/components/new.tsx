@@ -1,17 +1,24 @@
+'use client'
 import React from "react";
 import { Card, CardBody, Image } from "@nextui-org/react";
-import { Noticias } from "@prisma/client";
+import { useRouter } from 'next/navigation'
+
 
 interface Props {
-  item: Noticias;
+  id: number;
+  titulo: string|null;
+  lead: string|null;
 }
 
-const New: React.FC<Props> = ({ item }) => {
+const New: React.FC<Props> = ({ id, titulo,  lead}) => {
+  const router = useRouter()
+
   return (
     <Card
       isBlurred
       className="border-none bg-background/60 dark:bg-default-100/50"
       shadow="sm"
+      isPressable onPress={() => router.push('noticias/'+id.toString()) }
     >
       <CardBody>
         <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
@@ -27,9 +34,9 @@ const New: React.FC<Props> = ({ item }) => {
           </div>
 
           <div className="flex flex-col col-span-6 md:col-span-8">
-            <h1 className="text-2xl font-bold mb-4">{item.titulo}</h1>
+            <h1 className="text-2xl font-bold mb-4">{titulo}</h1>
             <p className="text-gray-600">
-              {item.lead}
+              {lead}
             </p>
           </div>
         </div>

@@ -21,16 +21,16 @@ export default async function NewsLeftSide({
     const { data, totalCount, totalPages } = await GetNoticias({ offset, limit, search })
 
     return (
-    <div className="gap-8 grid grid-cols-4 mb-4">
+    <div className="gap-8 grid grid-cols-1 md:grid-cols-4 mb-4">
       <div className="col-span-3 mt-4 gap-6 grid grid-cols-1">
                 <Suspense key={search + currentPage}>
                     {data.map((item, index) => (
-                        <New key={index} item={item} />
+                        <New key={index} id={item.id} titulo={item.titulo} lead={item.lead}/>
                     ))}
                 </Suspense>
                 <PaginationSide totalPages={totalPages} />
       </div>
-      <div className="col-span-1 items-end">
+      <div className="col-span-1 md:col-span-0 items-end hidden md:block">
         <NewsRightSide />
       </div>
     </div>

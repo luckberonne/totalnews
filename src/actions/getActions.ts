@@ -14,8 +14,14 @@ export async function GetNoticias({
 }) {
   const data = await prisma.noticias.findMany({
     where: { titulo: { contains: search } },
+    orderBy: { fecha_hora: 'desc' },
     skip: offset,
     take: limit,
+    select: {
+      id: true,
+      titulo: true,
+      lead: true,
+    },
   })
 
   const totalCount = await prisma.noticias.count({
@@ -24,4 +30,13 @@ export async function GetNoticias({
   const totalPages = Math.ceil(totalCount / limit)
 
   return { data, totalCount, totalPages }
+}
+
+
+
+export async function GetNoticia(idNew: number) {
+  const data = await prisma.noticias.findUnique({
+    where: { id: idNew }
+  })
+  return data;
 }
