@@ -3,10 +3,10 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Noticias {
@@ -16,26 +16,25 @@ model Noticias {
   lead       String?
   cuerpo     String?
   extra      String?
-  autor      String?   @db.VarChar(100) @default("Anónimo")
-  fecha_hora DateTime? @db.Timestamp(6) @default(now())
+  autor      String?   @default("Anónimo") @db.VarChar(100)
+  fecha_hora DateTime? @default(now()) @db.Timestamp(6)
 }
 
 model MiniNoticias {
   id         Int       @id @default(autoincrement())
   titulo     String?   @db.VarChar(255)
-  cuerpo     String?
-  autor      String?   @db.VarChar(100) @default("Anónimo")
-  fecha_hora DateTime? @db.Timestamp(6) @default(now())
+  autor      String?   @default("Anónimo") @db.VarChar(100)
+  fecha_hora DateTime? @default(now()) @db.Timestamp(6)
 }
 
 model Prompts {
-  id         Int       @id @default(autoincrement())
-  prompt     String?   
+  id         Int        @id @default(autoincrement())
+  prompt     String?
   tipo       TipoPrompt
-  idNoticia  Int?      
-  fecha_hora DateTime? @db.Timestamp(6) @default(now())
+  idNoticia  Int?
+  fecha_hora DateTime?  @default(now()) @db.Timestamp(6)
 
-  @@index([idNoticia], name: "idNoticiaIndex")
+  @@index([idNoticia], map: "idNoticiaIndex")
 }
 
 enum TipoPrompt {

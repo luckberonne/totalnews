@@ -40,3 +40,12 @@ export async function GetNoticia(idNew: number) {
   })
   return data;
 }
+
+
+export async function GetMiniNoticias() {
+  const data = await prisma.miniNoticias.findMany({
+    orderBy: { fecha_hora: 'desc' },
+    take: 4,
+  })
+  return data;
+}
