@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
-import router from "next/router";
 import TaskRun from "@/actions/task/taskRun";
+import { useRouter } from "next/navigation";
 
 export default function ModalNew() {
+  const router = useRouter()
+
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [data, setData] = useState<{ id: number; titulo: string | null; lead: string | null }>({
     id: 0,
@@ -26,27 +28,27 @@ export default function ModalNew() {
   
   return (
     <>
-      <Button onPress={handleRun}>Open Modal</Button>
+      <Button onPress={handleRun}>Generar Noticia</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">Nueva Noticia Generada</ModalHeader>
               <ModalBody>
-                {/* <p> 
+                <p> 
                   {data.titulo}
                 </p>
                 <p>
                   {data.lead}
-                </p> */}
+                </p>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                {/* <Button color="primary" onPress={() => router.push('noticias/'+ data.id.toString()) }>
+                <Button color="primary" onPress={() => {router.push(data.id.toString()), onOpenChange()}}>
                   Action
-                </Button> */}
+                </Button>
               </ModalFooter>
             </>
           )}

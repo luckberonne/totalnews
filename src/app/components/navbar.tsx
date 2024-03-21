@@ -51,16 +51,6 @@ export default function App() {
       </NavbarContent> */}
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button as={Link} color="primary" onClick={handleRun}>
-            Generar Noticia
-          </Button>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="secondary" onClick={handleMiniRun}>
-            Generar MiniNoticia
-          </Button>
-        </NavbarItem>
-        <NavbarItem>
           <ModalNew />
         </NavbarItem>
       </NavbarContent>
