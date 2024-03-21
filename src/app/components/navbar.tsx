@@ -1,12 +1,22 @@
 'use client'
 import React from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Modal } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import run from "@/pages/api/cron";
+import ModalNew from "../components/modalNew";
+
 
 
 export default function App() {
   const handleRun = async () => {
+    try {
+      await run();
+      console.log("Function run() executed successfully.");
+    } catch (error) {
+      console.error("Error executing function run():", error);
+    }
+  };
+  const handleMiniRun = async () => {
     try {
       await run();
       console.log("Function run() executed successfully.");
@@ -44,6 +54,14 @@ export default function App() {
           <Button as={Link} color="primary" onClick={handleRun}>
             Generar Noticia
           </Button>
+        </NavbarItem>
+        <NavbarItem>
+          <Button as={Link} color="secondary" onClick={handleMiniRun}>
+            Generar MiniNoticia
+          </Button>
+        </NavbarItem>
+        <NavbarItem>
+          <ModalNew />
         </NavbarItem>
       </NavbarContent>
     </Navbar>

@@ -18,7 +18,7 @@ const New: React.FC<Props> = ({ id, titulo,  lead}) => {
       isBlurred
       className="border-none bg-background/60 dark:bg-default-100/50"
       shadow="sm"
-      isPressable onPress={() => router.push('noticias/'+id.toString()) }
+      isPressable onPress={() => router.push(id.toString()) }
     >
       <CardBody>
         <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">

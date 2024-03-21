@@ -12,10 +12,9 @@ export default function PaginationSide({ totalPages }: { totalPages: any }) {
   const createPageURL = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams!);
     params.set("page", pageNumber.toString());
-    return params.toString(); // Return the updated search parameters as a string
+    return params.toString();
   }
   
-  // Check if `router` is available (client-side), then render Pagination component
   return router ? (
     <Pagination
       total={totalPages}
@@ -24,5 +23,5 @@ export default function PaginationSide({ totalPages }: { totalPages: any }) {
         router.push(page === 1 ? `${pathname}/` : `${pathname}/?${createPageURL(page)}`);
       }}
     />
-  ) : null; // Return null if `router` is not available (server-side)
+  ) : null;
 }

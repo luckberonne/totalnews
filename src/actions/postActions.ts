@@ -24,6 +24,11 @@ export async function PostNoticias({
       cuerpo,
       extra,
     },
+    select: {
+      id: true,
+      titulo: true,
+      lead: true,
+    },
   })
 
   return data
